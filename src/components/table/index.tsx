@@ -1,34 +1,47 @@
 import React from 'react';
 import {StyledTable, StyledTr, StyledTd, StyledTh} from './styles/index';
 
-type MyComponentProps = React.HTMLAttributes<HTMLElement>;
+type MyComponentProps = {
+    _tabledatas: Array<string>,
+    name: Array<string>
+} & React.HTMLAttributes<HTMLElement>;
+
+type ResultType = {
+    [key: string] : any
+}
 
 export default function Table({children, ...rest}: MyComponentProps){
-    return(
-        <StyledTable {...rest}>{children}</StyledTable>
-    )
-}
 
-Table.Tr = ({children, ...rest}: MyComponentProps) => {
-    return(
-        <StyledTr {...rest}>
-            {children}
-        </StyledTr>
-    )
-}
+    const shareResult: ResultType = rest._tabledatas;
 
-Table.Th = ({children, ...rest}: MyComponentProps) => {
     return(
-        <StyledTh {...rest}>
-            {children}
-        </StyledTh>
-    )
-}
-
-Table.Td = ({children, ...rest}: MyComponentProps) => {
-    return(
-        <StyledTd {...rest}>
-            {children}
-        </StyledTd>
+        <StyledTable {...rest}>
+            <thead>
+                <StyledTr>
+                    <StyledTh>{rest.name[0]}</StyledTh>
+                    <StyledTh>{rest.name[1]}</StyledTh>
+                    <StyledTh>{rest.name[2]}</StyledTh>
+                    <StyledTh>{rest.name[3]}</StyledTh>
+                    <StyledTh>{rest.name[4]}</StyledTh>
+                    <StyledTh>{rest.name[5]}</StyledTh>
+                    <StyledTh>{rest.name[6]}</StyledTh>
+                </StyledTr>
+            </thead>
+            <tbody>
+                {
+                    shareResult.map((item : ResultType) => 
+                        <StyledTr key={item["ID"]}>
+                            <StyledTd>{item["ID"]}</StyledTd>
+                            <StyledTd>{item["JobTitle"]}</StyledTd>
+                            <StyledTd>{item["EmailAddress"]}</StyledTd>
+                            <StyledTd>{item["FirstNameLastName"]}</StyledTd>
+                            <StyledTd>{item["Email"]}</StyledTd>
+                            <StyledTd>{item["Phone"]}</StyledTd>
+                            <StyledTd>{item["Company"]}</StyledTd>
+                        </StyledTr>
+                    )
+                }
+            </tbody>
+        </StyledTable>
     )
 }

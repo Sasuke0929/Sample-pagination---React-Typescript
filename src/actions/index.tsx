@@ -17,4 +17,5 @@ export const controlDataNumber = async (data : Array<string>) => {
         }
         _result.push(data[i]);
     }
+    return _result;
 }

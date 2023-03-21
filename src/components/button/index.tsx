@@ -1,10 +1,16 @@
 import React, { ReactNode } from 'react';
 import {StyledButton} from './styles/index';
 
-type MyComponentProps = React.HTMLAttributes<HTMLElement>;
+type MyComponentProps = {
+    onClick1: () => void,
+    onClick2: () => void,
+} & React.HTMLAttributes<HTMLElement>;
 
 export default function Button({children, ...rest}: MyComponentProps){
     return(
-        <StyledButton {...rest}>{children}</StyledButton>
+        <>
+            <StyledButton onClick={rest.onClick2}>Next</StyledButton>
+            <StyledButton onClick={rest.onClick1}>Prev</StyledButton>
+        </>
     )
 }
